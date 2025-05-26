@@ -6,12 +6,12 @@ spring:
     driver-class-name: org.postgresql.Driver
 
   jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
     show-sql: true
     properties:
       hibernate:
+        # default_schema: public  # Optional: Uncomment if you want to specify the schema
 
   thymeleaf:
     prefix: classpath:/templates/
