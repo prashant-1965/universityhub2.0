@@ -13,6 +13,7 @@
 
     <artifactId>universitySoftware</artifactId>
     <name>University Software Core</name>
+    <packaging>jar</packaging>
     <description>Backend services for university management</description>
 
     <dependencies>
@@ -62,11 +63,12 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-         <dependency>
+        <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
             <version>2.17.0</version> <!-- You can update to the latest -->
         </dependency>
+
     </dependencies>
 
     <build>
@@ -92,6 +94,13 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
                     <excludes>
                         <exclude>
