@@ -17,9 +17,18 @@ spring:
 
 server:
   port: ${PORT:8080}
-  address: 0.0.0.0  # Add this line to bind to all interfaces
+  address: 0.0.0.0  # Bind to all interfaces
 
 logging:
   level:
     com.university: DEBUG
     org.springframework.web: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: always
