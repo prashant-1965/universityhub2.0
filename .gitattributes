@@ -1,2 +1,22 @@
+# Normalize line endings for consistency
+* text=auto
+
+# Maven wrapper scripts
 /mvnw text eol=lf
 *.cmd text eol=crlf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.jar binary
+*.class binary
+
+# Diff rules for documentation
+*.md diff=markdown
+
+# Prevent diff for archives
+*.zip binary
+*.tar binary
+*.gz binary
