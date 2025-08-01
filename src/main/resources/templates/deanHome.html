@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dean Dashboard - University Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logout-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .welcome-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .welcome-section h1 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome-section p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        .card h3 {
+            color: #333;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-icon {
+            width: 24px;
+            height: 24px;
+            background: #667eea;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+        }
+
+        .card p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<header class="header">
+    <div class="header-content">
+        <div class="logo">University Portal</div>
+        <div class="user-info">
+            <span>Welcome, <strong sec:authentication="name">Dean</strong></span>
+            <span class="role-badge">Dean</span>
+            <form th:action="@{/logout}" method="post" style="display: inline;">
+                <button type="submit" class="logout-btn">Logout</button>
+            </form>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <section class="welcome-section">
+        <h1>Dean Dashboard</h1>
+        <p>Welcome to your administrative dashboard. Manage university operations and oversee academic activities.</p>
+    </section>
+
+    <section class="quick-stats">
+        <div class="stat-card">
+            <div class="stat-number">1,234</div>
+            <div class="stat-label">Total Students</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">87</div>
+            <div class="stat-label">Faculty Members</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">15</div>
+            <div class="stat-label">Departments</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">42</div>
+            <div class="stat-label">Active Programs</div>
+        </div>
+    </section>
+
+    <section class="dashboard-grid">
+        <div class="card">
+            <h3>
+                <span class="card-icon">👥</span>
+                Faculty Management
+            </h3>
+            <p>Manage faculty members, their assignments, and performance evaluations.</p>
+            <a th:href="@{/facultyUi/indexFaculty}" class="btn">Manage Faculty</a>
+        </div>
+
+        <div class="card">
+            <h3>
+                <span class="card-icon">🎓</span>
+                Student Management
+            </h3>
+            <p>Oversee student admissions, academic records, and student information.</p>
+            <a th:href="@{/studentUi/indexStudent}" class="btn">Manage Students</a>
+        </div>
+
+        <div class="card">
+            <h3>
+                <span class="card-icon">🏢</span>
+                Branch Management
+            </h3>
+            <p>Manage university branches, locations, and branch-specific operations.</p>
+            <a th:href="@{/branchUi/indexBranch}" class="btn">Manage Branches</a>
+        </div>
+
+        <div class="card">
+            <h3>
+                <span class="card-icon">📚</span>
+                Section Management
+            </h3>
+            <p>Organize and manage academic sections, class divisions, and course sections.</p>
+            <a th:href="@{/sectionUi/indexSection}" class="btn">Manage Sections</a>
+        </div>
+
+        <div class="card">
+            <h3>
+                <span class="card-icon">📊</span>
+                Reports & Analytics
+            </h3>
+            <p>View comprehensive reports on academic performance and institutional metrics.</p>
+            <a href="#" class="btn">View Reports</a>
+        </div>
+
+        <div class="card">
+            <h3>
+                <span class="card-icon">⚙️</span>
+                System Settings
+            </h3>
+            <p>Configure university-wide settings, policies, and administrative parameters.</p>
+            <a href="#" class="btn">Settings</a>
+        </div>
+    </section>
+</div>
+</body>
+</html>

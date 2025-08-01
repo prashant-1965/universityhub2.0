@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Faculty Control Panel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/style/indexFaculty.css}">
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <button class="back-button" onclick="window.location.href='/home/dean'" title="Back to Dashboard">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+        <h1>Faculty Control Panel</h1>
+    </header>
+
+    <div class="stats-container">
+        <div class="stat-card">
+            <div class="stat-value" id="totalFaculty">--</div>
+            <div class="stat-label">Total Faculty</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value" id="activeFaculty">--</div>
+            <div class="stat-label">Active Faculty</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value" id="newFaculty">--</div>
+            <div class="stat-label">New This Year</div>
+        </div>
+    </div>
+
+    <div class="options-container">
+        <!-- Add Faculty Card -->
+        <form id="addFacultyForm" class="card">
+            <div class="card-header">
+                <div class="icon">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <h3>Add Faculty</h3>
+            </div>
+            <div class="input-icon">
+                <input type="text" id="firstName" placeholder="First Name" required>
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="input-icon">
+                <input type="text" id="lastName" placeholder="Last Name" required>
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="input-icon">
+                <input type="text" id="designation" placeholder="Designation" required>
+                <i class="fas fa-briefcase"></i>
+            </div>
+            <div class="input-icon">
+                <input type="email" id="email" placeholder="Email Address" required>
+                <i class="fas fa-envelope"></i>
+            </div>
+            <div class="input-icon">
+                <input type="text" id="location" placeholder="Location" required>
+                <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <button type="submit" class="btn btn-icon">
+                <div class="loading"></div>
+                <span>
+                  <i class="fas fa-plus-circle"></i> Add Faculty
+                </span>
+            </button>
+        </form>
+
+        <!-- Get Faculty By UID Card -->
+        <form id="getFacultyForm" class="card">
+            <div class="card-header">
+                <div class="icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h3>Find Faculty</h3>
+            </div>
+            <div class="input-icon">
+                <input type="number" id="facultyUid" placeholder="Enter faculty UID to search" required>
+                <i class="fas fa-id-card"></i>
+            </div>
+            <button type="submit" class="btn btn-icon">
+                <div class="loading"></div>
+                <span>
+                  <i class="fas fa-search"></i> Search
+                </span>
+            </button>
+            <div id="facultyResult" class="result-container"></div>
+        </form>
+
+        <!-- Delete Faculty Card -->
+        <form id="deleteFacultyForm" class="card">
+            <div class="card-header">
+                <div class="icon">
+                    <i class="fas fa-user-minus"></i>
+                </div>
+                <h3>Remove Faculty</h3>
+            </div>
+            <div class="input-icon">
+                <input type="number" id="facultyUidDelete" placeholder="Enter faculty UID to remove" required>
+                <i class="fas fa-user-slash"></i>
+            </div>
+            <button type="submit" class="btn btn-icon">
+                <div class="loading"></div>
+                <span>
+                  <i class="fas fa-trash-alt"></i> Remove
+                </span>
+            </button>
+        </form>
+
+        <!-- Get All Faculty Card -->
+        <div class="card">
+            <div class="card-header">
+                <div class="icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>All Faculty</h3>
+            </div>
+            <button type="button" onclick="navigateTo('/faculty/viewAll')" class="btn btn-icon">
+                <div class="loading"></div>
+                <span>
+                  <i class="fas fa-table"></i> View All
+                </span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div id="toast" class="toast"></div>
+<script th:src="@{/script/indexFaculty.js}"></script>
+</body>
+</html>
