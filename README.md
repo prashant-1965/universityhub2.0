@@ -33,9 +33,6 @@ Unit Testing
 --> JUnit & Spring Boot Test for controllers and application layer
 
 📂 Project Structure
-bash
-Copy
-Edit
 bhardwajUniversitySoftware
 │── pom.xml                     # Maven build file
 │── mvnw / mvnw.cmd             # Maven wrapper
