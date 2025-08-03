@@ -5,6 +5,7 @@ import com.university.application.exceptionclass.InvalidBranchException;
 import com.university.application.exceptionclass.InvalidSectionException;
 import com.university.application.repository.SectionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,8 +19,8 @@ public class SectionServicesImpl implements SectionServices {
 
     public String addSection(Section section) throws InvalidSectionException
     {
-        if(section.getSectionCode()==null || section.getSectionInCharge()==null){
-            throw new InvalidSectionException("section fields can not be null");
+        if(section==null || section.getSectionCode()==null || section.getSectionInCharge()==null){
+            throw new InvalidSectionException("section fields can not be null", HttpStatus.BAD_REQUEST);
         }
         sectionRepository.save(section);
         return "Section added Successfully";
@@ -28,14 +29,17 @@ public class SectionServicesImpl implements SectionServices {
     {
         List<Section> sectionList= sectionRepository.findAll();
         if(sectionList.isEmpty()){
-            throw new InvalidSectionException("No section found");
+            throw new InvalidSectionException("No section found",HttpStatus.NOT_FOUND);
         }
         return sectionList;
     }
     public Section getSectionByCode(String sectionCode) throws InvalidBranchException
     {
-        if(sectionCode==null || sectionRepository.existsBySectionCode(sectionCode)){
-            throw new InvalidBranchException("Please provide valid section code");
+        if(sectionCode.equals("null")){
+            throw new InvalidSectionException("Section can't be null",HttpStatus.BAD_REQUEST);
+        }
+        if(!sectionRepository.existsBySectionCode(sectionCode)){
+            throw new InvalidBranchException("Section code is not found",HttpStatus.NOT_FOUND);
         }
         return sectionRepository.findBySectionCode(sectionCode);
     }
@@ -43,8 +47,11 @@ public class SectionServicesImpl implements SectionServices {
     @Transactional
     public String removeSectionByCode(String sectionCode) throws InvalidSectionException
     {
-        if(sectionCode==null || sectionRepository.existsBySectionCode(sectionCode)){
-            throw new InvalidBranchException("Please provide valid section code");
+        if(sectionCode.equals("null")){
+            throw new InvalidSectionException("Section can't be null",HttpStatus.BAD_REQUEST);
+        }
+        if(!sectionRepository.existsBySectionCode(sectionCode)){
+            throw new InvalidBranchException("Section code is not available",HttpStatus.NOT_FOUND);
         }
         sectionRepository.deleteBySectionCode(sectionCode);
         return "Section removed Successfully";
