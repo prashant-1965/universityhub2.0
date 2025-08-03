@@ -26,6 +26,6 @@ public class GlobalExceptionHandler {
     }
     @ExceptionHandler(InvalidStudentException.class)
     public ResponseEntity<?> handelInvalidStudent(InvalidStudentException e){
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        return ResponseEntity.status(e.getStatus()).body(e.getMessage());
     }
 }
